@@ -35,6 +35,8 @@ public class RewardVideoExecutor extends AbstractExecutor {
 
     public PluginResult prepareAd(JSONObject options, CallbackContext callbackContext) {
         CordovaInterface cordova = plugin.cordova;
+
+        final String userId = options.optString("userId");
         plugin.config.setRewardVideoOptions(options);
 
         final CallbackContext delayCallback = callbackContext;
@@ -45,8 +47,11 @@ public class RewardVideoExecutor extends AbstractExecutor {
                 clearAd();
 
                 rewardedVideoAd = MobileAds.getRewardedVideoAdInstance(cordova.getActivity());
+
+                rewardedVideoAd.setUserId(userId);
                 rewardedVideoAd.setRewardedVideoAdListener(new RewardVideoListener(RewardVideoExecutor.this));
-                Log.w("rewardedvideo", plugin.config.getRewardedVideoAdUnitId());
+
+                Log.w("rewardedvideo", plugin.config.getRewardedVideoAdUnitId() + " for userId " + userId);
 
                 synchronized (rewardedVideoLock) {
                     if (!isRewardedVideoLoading) {
