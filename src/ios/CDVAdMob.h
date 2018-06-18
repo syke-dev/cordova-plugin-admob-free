@@ -54,6 +54,7 @@
 @property (assign) NSObject* rewardedVideoLock;
 @property (assign) BOOL isRewardedVideoLoading;
 
+@property (nonatomic, retain) NSString* rewardedVideoUserIdentifier;
 
 @property (nonatomic, retain) NSString* gender;
 @property (nonatomic, retain) NSString* forChild;

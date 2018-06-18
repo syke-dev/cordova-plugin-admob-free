@@ -42,6 +42,7 @@
 @synthesize bannerIsVisible, bannerIsInitialized;
 @synthesize bannerShow, autoShow, autoShowBanner, autoShowInterstitial, autoShowRewardVideo;
 
+@synthesize rewardedVideoUserIdentifier;
 
 @synthesize gender, forChild;
 
@@ -343,7 +344,9 @@
     if (argc >= 1) {
         NSDictionary* options = [command argumentAtIndex:0 withDefault:[NSNull null]];
         [self __setOptions:options];
+        
         autoShowRewardVideo = autoShow;
+        rewardedVideoUserIdentifier = [options objectForKey:@"userId"];
     }
 
     [self __cycleRewardVideo];
@@ -406,6 +409,8 @@
                 self.rewardVideoView = [GADRewardBasedVideoAd sharedInstance];
                 self.rewardVideoView.delegate = self;
 
+                [self.rewardVideoView setUserIdentifier:rewardedVideoUserIdentifier];
+                
                 [self.rewardVideoView loadRequest:[GADRequest request] withAdUnitID:self.rewardVideoId];
             }
         }
