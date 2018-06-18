@@ -26,7 +26,11 @@
     </js-module>
 
     <dependency id="cordova-promise-polyfill" version="~0.0.2" />
+<!--
+    Manually pulling in admob sdks now and using cocoapods for iOS
+
     <dependency id="cordova-admob-sdk" version="~0.17.0" />
+-->
 
     <platform name="android">
         <config-file parent="/manifest/application" target="AndroidManifest.xml">
@@ -57,6 +61,8 @@
         <source-file src="src/android/AdMob.java" target-dir="src/name/ratson/cordova/admob" />
         <source-file src="src/android/AdMobConfig.java" target-dir="src/name/ratson/cordova/admob" />
         <source-file src="src/android/CordovaEventBuilder.java" target-dir="src/name/ratson/cordova/admob" />
+
+        <framework src="com.google.firebase:firebase-ads:+" />
     </platform>
 
     <platform name="ios">
@@ -67,5 +73,7 @@
         </config-file>
         <header-file src="src/ios/CDVAdMob.h" />
         <source-file src="src/ios/CDVAdMob.m" />
+
+        <framework src="Firebase/AdMob" type="podspec" spec="" />
     </platform>
 </plugin>
